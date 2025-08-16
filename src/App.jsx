@@ -41,7 +41,12 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("searchHistory", JSON.stringify(history));
   }, [history]);
+  
+  useEffect(() => {
+    searchWikipedia(null, "India"); // ✅ default search
+  }, []);
 
+  
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   const fetchSuggestion = async (term) => {
@@ -206,16 +211,19 @@ export default function App() {
       {/* Input */}
 {/* Search Input with Gradient Outline */}
 <div className="w-full max-w-xl p-[2px] rounded-full bg-gradient-to-r from-blue-400 via-blue-600 to-emerald-400">
-  <input
-    type="text"
-    placeholder="Search Wikipedia..."
-    className="w-full px-6 py-3 rounded-full
-               bg-gray-200 dark:bg-gray-800
-               text-gray-900 dark:text-gray-100
-               placeholder-gray-500 dark:placeholder-gray-400
-               border-none focus:outline-none
-               transition duration-200"
-  />
+<input
+  type="text"
+  value={query}   // <-- bind state
+  onChange={(e) => setQuery(e.target.value)}  // <-- update state
+  placeholder="Search Wikipedia..."
+  className="w-full px-6 py-3 rounded-full
+             bg-gray-200 dark:bg-gray-800
+             text-gray-900 dark:text-gray-100
+             placeholder-gray-500 dark:placeholder-gray-400
+             border-none focus:outline-none
+             transition duration-200"
+/>
+
 </div>
 
 
